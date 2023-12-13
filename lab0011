@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Participant {
+    string lastName;
+    int age;
+    string city;
+};
+
+int main() {
+    vector<Participant> participants;
+    string city;
+    int numParticipants;
+	
+    cout << "Enter the number of conference participants: ";
+    cin >> numParticipants;
+
+    for (int i = 0; i < numParticipants; ++i) {
+        Participant participant;
+        cout << "\nEnter details for participant " << i + 1 << ":\n";
+        cout << "Last Name: ";
+        cin >> participant.lastName;
+        cout << "Age: ";
+        cin >> participant.age;
+        cout << "City: ";
+        cin >> participant.city;
+        participants.push_back(participant);
+    }
+
+    cout << "\nEnter the city to search for participants: ";
+    cin >> city;
+
+    int totalAge = 0, numParticipantsFromCity = 0;
+    for (const auto& participant : participants) {
+        if (participant.city == city) {
+            cout << "\nParticipant: " << participant.lastName << ", Age: " << participant.age << endl;
+            totalAge += participant.age;
+            numParticipantsFromCity++;
+        }
+    }
+
+    if (numParticipants > 0) {
+        double averageAge = static_cast<double>(totalAge) / numParticipants;
+        cout << "\nAverage age of conference participants: " << averageAge << endl;
+    } else {
+        cout << "\nNo participants entered." << endl;
+    }
+
+    return 0;
+}
